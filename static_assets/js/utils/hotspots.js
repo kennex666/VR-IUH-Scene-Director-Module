@@ -153,6 +153,28 @@ export const getSpotsFromScene = () => {
 	return result;
 };
 
+export const getPluginsFromScene = () => {
+	const sceneEl = document.querySelector("a-scene");
+	const plugins = sceneEl.querySelectorAll("a-entity[plugin-id]");
+	const result = [];
+	plugins.forEach((spot) => {
+		const id = spot.getAttribute("plugin-id") || "unknown-id";
+		const type = spot.getAttribute("plugin-type") || "goAHead";
+		const position = spot.getAttribute("position") || { x: 0, y: 0, z: 0 };
+		const rotation = spot.getAttribute("rotation") || { x: 0, y: 0, z: 0 };
+		const scale = spot.getAttribute("scale") || { x: 1, y: 1, z: 1 };
+		result.push({
+			id,
+			type,
+			title: "Unknown Title",
+			position,
+			rotation,
+			scale,
+		});
+	});
+	return result;
+};
+
 /**
  * Element popup to select type of hotspot
  * @param {*} onSelect

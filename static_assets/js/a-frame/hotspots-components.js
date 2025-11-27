@@ -69,6 +69,7 @@ export function createSpot(spot, type = "spot") {
 	spotElement.setAttribute("position", position);
 	spotElement.setAttribute("src", "#hotspot");
 
+	spotElement.setAttribute("material", "side: double; transparent: true;");
 	// lấy rotation của spot
 	spotElement.setAttribute("rotation", `0 0 0`);
 

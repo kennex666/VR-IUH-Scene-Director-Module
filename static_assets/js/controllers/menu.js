@@ -1,6 +1,6 @@
 import { getCurrentRotation } from "../a-frame/camera.js";
 import { toastMessage } from "../ui/toast.js";
-import { getSpotsFromScene } from "../utils/hotspots.js";
+import { getPluginsFromScene, getSpotsFromScene } from "../utils/hotspots.js";
 
 export const MenuController = {
 	setFavorite: function () {
@@ -38,8 +38,9 @@ export const MenuController = {
 			return;
 		}
 		const spots = getSpotsFromScene();
-		currentScene.spots = spots.filter((spot) => !spot.isPlugin);
-		currentScene.plugins = spots.filter((spot) => spot.isPlugin);
+		const plugins = getPluginsFromScene();
+		currentScene.spots = spots;
+		currentScene.plugins = plugins;
 
 		console.log("Current scene data to save:", currentScene);
 		if (messenger) {
