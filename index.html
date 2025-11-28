@@ -89,7 +89,7 @@
 		</p>
 	</div>
 
-	<!-- Create a popup menu for additional options -->
+	<!-- Popup menu-->
 	<div
 		class="fixed bottom-16 right-4 bg-[--color-primary] text-white p-4 rounded-lg shadow-lg z-40 hidden"
 		id="popup-custom-value"
@@ -248,72 +248,32 @@
         <i class="fa-solid fa-x"></i>
       </button> -->
 			<button
-				data-intro="Mở menu truy cập nhanh các địa điểm"
-				data-step="1"
 				class="w-6 h-6 md:w-8 md:h-8 border-2 border-white rounded-full text-[--color-quaternary] hover:border-[--color-secondary-light] hover:[--color-tertiary-light]"
-				data-controller="openMenuLeftLocations"
+				data-controller="openGuide"
 				onclick="controllMenu(this)"
-				title="Mở bảng điều hướng"
+				title="Mở hướng dẫn"
 			>
-				<i class="fa-solid fa-bars"></i>
+				<i class="fa-solid fa-book-open"></i>
 			</button>
 		</div>
 
 		<!-- group button 2 -->
 		<div class="flex flex-row items-center gap-3 relative">
-			<div class="relative">
-				<!-- Nút add -->
-				<!-- <button 
-          class="btn-add-location w-6 h-6 md:w-8 md:h-8 border-2 border-white rounded-full text-[--color-quaternary] hover:border-[--color-secondary-light] hover:[--color-tertiary-light]" 
-          title="Thêm điểm di chuyển">
-          <i class="fa-solid fa-add"></i>
-        </button> -->
-
-				<!-- Nhóm 3 nút con -->
-				<div
-					class="submenu absolute bottom-full left-1/2 -translate-x-1/2 translate-y-[-15%] flex flex-col items-center gap-2 hidden bg-[--color-primary] p-2 rounded-lg shadow-lg"
-				>
-					<button
-						class="sub-btn w-8 h-8 border-2 border-white rounded-full text-[--color-quaternary] hover:border-[--color-secondary-light] hover:[--color-tertiary-light] flex items-center justify-center"
-						data-controller="addHotspot"
-						data-controller-attribute="markPoint"
-						onclick="controllMenu(this)"
-						title="Thêm điểm đánh dấu"
-					>
-						<i class="fa-solid fa-location-dot"></i>
-					</button>
-
-					<button
-						class="sub-btn w-8 h-8 border-2 border-white rounded-full text-[--color-quaternary] hover:border-[--color-secondary-light] hover:[--color-tertiary-light] flex items-center justify-center"
-						data-controller="addHotspot"
-						data-controller-attribute="goAHead"
-						onclick="controllMenu(this)"
-						title="Thêm điểm di chuyển"
-					>
-						<i class="fa-solid fa-arrows-up-down-left-right"></i>
-					</button>
-
-					<button
-						class="sub-btn w-8 h-8 border-2 border-white rounded-full text-[--color-quaternary] hover:border-[--color-secondary-light] hover:[--color-tertiary-light] flex items-center justify-center"
-						data-controller="addHotspot"
-						data-controller-attribute="highLight"
-						onclick="controllMenu(this)"
-						title="Thêm điểm thông tin"
-					>
-						<i class="fa-solid fa-circle-info"></i>
-					</button>
-				</div>
-			</div>
-
 			<button
-				data-intro="Mở menu truy cập nhanh các địa điểm"
-				data-step="1"
+				class="w-6 h-6 md:w-8 md:h-8 border-2 border-white rounded-full text-[--color-quaternary] hover:border-[--color-secondary-light] hover:[--color-tertiary-light]"
+				data-controller="openMenuLeftLocations"
+				onclick="controllMenu(this)"
+				title="Mở locations"
+			>
+				<i class="fa-solid fa-map"></i>
+			</button>
+			<button
 				class="w-6 h-6 md:w-8 md:h-8 border-2 border-white rounded-full text-[--color-quaternary] hover:border-[--color-secondary-light] hover:[--color-tertiary-light]"
 				data-controller="openMenuLeftPlugins"
 				onclick="controllMenu(this)"
 				title="Mở plugins menu"
 			>
-				<i class="fa-solid fa-bars"></i>
+				<i class="fa-solid fa-plug"></i>
 			</button>
 
 			<button
@@ -375,4 +335,8 @@
       </button> -->
 		</div>
 	</div>
+
+	<!-- Guide -->
+	<guide-intro></guide-intro>
+	<background-dim></background-dim>
 </html>

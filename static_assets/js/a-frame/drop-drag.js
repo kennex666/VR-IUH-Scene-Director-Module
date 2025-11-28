@@ -3,9 +3,10 @@ AFRAME.registerComponent("handle-drag-and-drop", {
 		// Define any schema properties if needed
 		axis: { type: "string", default: "x" },
 		targetEl: { type: "selector", default: "#targetBox" },
-		// new: mode can be 'translate' or 'rotate' (or hold Alt to rotate temporarily)
+		// new: mode can be 'translate' or 'rotate' or 'dolly'
 		mode: { type: "string", default: "translate" },
 		rotateSpeed: { type: "number", default: 0.005 },
+		dollySpeed: { type: "number", default: 0.05 }, // new: speed for moving along camera forward
 	},
 	init: function () {
 		const el = this.el;
@@ -13,6 +14,7 @@ AFRAME.registerComponent("handle-drag-and-drop", {
 		this.isHolding = false;
 		this.isHoldThisObject = false;
 		this.isRotating = false; // new flag
+		this.isDollying = false; // new flag
 		this.targetEl = data.targetEl;
 		this.handleMovement(el);
 
@@ -42,6 +44,12 @@ AFRAME.registerComponent("handle-drag-and-drop", {
 			// If rotating mode -> handle rotation and exit
 			if (this.isRotating) {
 				this.handleRotation(event, target);
+				return;
+			}
+
+			// If dolly mode -> move object along camera forward/backward
+			if (this.isDollying) {
+				this.handleDolly(event, cam, target);
 				return;
 			}
 
@@ -84,6 +92,7 @@ AFRAME.registerComponent("handle-drag-and-drop", {
 			this.isHolding = false;
 			this.isHoldThisObject = false;
 			this.isRotating = false;
+			this.isDollying = false;
 			window.__cam.components["look-controls"].play();
 			window.__holdingAxis = null;
 			window.__holdingTarget = null;
@@ -93,6 +102,8 @@ AFRAME.registerComponent("handle-drag-and-drop", {
 			this.isHolding = true;
 			// Enter rotate mode if Alt is held OR schema mode is 'rotate'
 			this.isRotating = event.altKey || this.data.mode === "rotate";
+			// Enter dolly mode if Shift is held OR schema mode is 'dolly'
+			this.isDollying = event.shiftKey || this.data.mode === "dolly";
 		});
 
 		// optional: prevent context menu if right-click used for rotate
@@ -130,6 +141,30 @@ AFRAME.registerComponent("handle-drag-and-drop", {
 					x: THREE.MathUtils.radToDeg(rot.x),
 					y: THREE.MathUtils.radToDeg(rot.y),
 					z: THREE.MathUtils.radToDeg(rot.z),
+				},
+			})
+		);
+	},
+	// new helper to move object closer/farther along camera direction
+	handleDolly: function (event, cam, target) {
+		// movementY: moving mouse up => negative, we want negative => move forward
+		const speed = this.data.dollySpeed;
+		const forward = new THREE.Vector3();
+		cam.getWorldDirection(forward); // forward points out of camera
+		// normalize to be safe
+		forward.normalize();
+		// invert sign so dragging up (negative movementY) moves object closer (forward)
+		const amount = -event.movementY * speed;
+		target.position.addScaledVector(forward, amount);
+		this.targetEl.setAttribute("position", target.position);
+
+		document.dispatchEvent(
+			new CustomEvent("position-change", {
+				detail: {
+					id: this.targetEl.id,
+					x: target.position.x,
+					y: target.position.y,
+					z: target.position.z,
 				},
 			})
 		);

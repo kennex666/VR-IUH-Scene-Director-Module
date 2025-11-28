@@ -128,8 +128,8 @@ export function HotspotsElementPlugin({ id, name, imageUrl }) {
 	button.setAttribute("data-location-id", id);
 	button.setAttribute("onclick", `findHotspot('${id}')`);
 	const img = document.createElement("img");
-	img.src = imageUrl || "../img/plugin.jpg";
-	img.alt = name || id;
+	img.src = imageUrl || "./static_assets/img/plugin.jpg";
+	img.alt = name || id || "Plugin";
 	img.className = "w-full h-28 object-cover inline-block";
 	const div = document.createElement("div");
 	div.className = "bottom-1 absolute px-2 py-1 bg-[--color-primary] text-sm";

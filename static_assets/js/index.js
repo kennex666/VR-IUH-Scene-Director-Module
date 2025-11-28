@@ -3,6 +3,8 @@ import "./libs/tailwind/tailwind.js";
 import "./a-frame/components/custom.js";
 import "./instances/tab-message-handler.js";
 import "./a-frame/components/axis-helper.js";
+import "./ui/GuideIntro.js";
+import "./ui/BackgroudDim.js";
 
 import "./a-frame/axis-helper.js";
 import "./a-frame/camera.js";

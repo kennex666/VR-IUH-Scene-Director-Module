@@ -78,10 +78,16 @@ export const MenuController = {
 			toastMessage("Không thể kết nối đến admin, hãy đóng tab này và mở lại bằng giao diện admin", "error", 8000);
 		}
 	},
+	openGuide: () => {
+		const guideIntro = document.querySelector("guide-intro");
+		if (guideIntro) {
+			guideIntro.setAttribute("data-is-open", "true");
+		}
+	},
 	openMenuLeftPlugins: () => {
 		const sidebar = document.querySelector("#side-menu");
 		if (sidebar) {
-			sidebar.classList.toggle("-translate-x-full");
+			sidebar.classList.toggle("-translate-x-full", false);
 			document.querySelector("#plugin-list").classList.toggle("hidden", false);
 			document.querySelector("#location-list").classList.toggle("hidden", true);
 		}
@@ -89,7 +95,7 @@ export const MenuController = {
 	openMenuLeftLocations: () => {
 		const sidebar = document.querySelector("#side-menu");
 		if (sidebar) {
-			sidebar.classList.toggle("-translate-x-full");
+			sidebar.classList.toggle("-translate-x-full", false);
 			document.querySelector("#plugin-list").classList.toggle("hidden", true);
 			document.querySelector("#location-list").classList.toggle("hidden", false);
 		}
