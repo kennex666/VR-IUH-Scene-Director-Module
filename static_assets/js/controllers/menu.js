@@ -78,6 +78,19 @@ export const MenuController = {
 			toastMessage("Không thể kết nối đến admin, hãy đóng tab này và mở lại bằng giao diện admin", "error", 8000);
 		}
 	},
+
+	copyCurrentViewXY: () => {
+		const rotation = getCurrentRotation();
+		const rotationXY = `X: ${rotation.x.toFixed(2)}, Y: ${rotation.y.toFixed(2)}`;
+		navigator.clipboard
+			.writeText(rotationXY)
+			.then(() => {
+				toastMessage(`Đã sao chép góc nhìn hiện tại: ${rotationXY}`, "success", 4000);
+			})
+			.catch((err) => {
+				toastMessage(`Không thể sao chép góc nhìn: ${err}`, "error", 4000);
+			});
+	},
 	openGuide: () => {
 		const guideIntro = document.querySelector("guide-intro");
 		if (guideIntro) {
