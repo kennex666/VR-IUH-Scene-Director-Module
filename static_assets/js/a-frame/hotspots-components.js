@@ -27,7 +27,7 @@ export function createMarkPoint(spot, type = "spot") {
 	ringElement2.setAttribute("radius-inner", "0.00");
 	ringElement2.setAttribute("radius-outer", "0.05");
 	ringElement2.setAttribute("look-at", "#cam");
-	ringElement2.setAttribute("color", "#FF6B6B");
+	ringElement2.setAttribute("color", "#FDB924");
 
 	ringElement2.setAttribute(
 		"animation__scale",
@@ -42,7 +42,7 @@ export function createMarkPoint(spot, type = "spot") {
 	ringElement3.setAttribute("radius-inner", "0.07");
 	ringElement3.setAttribute("radius-outer", "0.09");
 	ringElement3.setAttribute("look-at", "#cam");
-	ringElement3.setAttribute("color", "#262261");
+	ringElement3.setAttribute("color", "#21409A");
 
 	ringElement3.setAttribute(
 		"animation__scale",
